@@ -1,48 +1,52 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
+const int OFFSET = 10000;
+const int MAX_R = 20005;
+
+int diff[MAX_R];
+
 int main() {
-    // Please write your code here.
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n;
     cin >> n;
-    vector<int> v(20002);
 
-    int mark = 10000;
+    int cur = 0;
 
-    while(n--)
-    {
-        int x;
-        char cmd;
-        cin >> x >> cmd;
+    for (int i = 0; i < n; i++) {
+        int dist;
+        char dir;
+        cin >> dist >> dir;
 
-        if (cmd == 'L')
-        {
-            while (x--)
-            {
-                v[mark]++;
-                mark--;
-            }
+        int nxt;
+        if (dir == 'R') {
+            nxt = cur + dist;
+            diff[cur + OFFSET] += 1;
+            diff[nxt + OFFSET] -= 1;
+        } else {
+            nxt = cur - dist;
+            diff[nxt + OFFSET] += 1;
+            diff[cur + OFFSET] -= 1;
         }
-
-        else
-        {
-            while (x--)
-            {
-                v[mark]++;
-                mark++;
-            }
-        }
+        cur = nxt;
     }
+
     int ans = 0;
-    for (auto& e : v)
-    {
-        if (e >= 2)
+    int current_overlap = 0;
+
+    for (int i = 0; i < MAX_R - 1; i++) {
+        current_overlap += diff[i];
+        if (current_overlap >= 2) {
             ans++;
+        }
     }
 
     cout << ans << '\n';
 
-    
     return 0;
 }
