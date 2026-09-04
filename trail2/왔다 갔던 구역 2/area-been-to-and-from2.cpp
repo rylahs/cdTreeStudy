@@ -6,9 +6,9 @@ int main() {
     // Please write your code here.
     int n;
     cin >> n;
-    vector<int> v(2002);
+    vector<int> v(20002);
 
-    int mark = 1000;
+    int mark = 10000;
 
     while(n--)
     {
