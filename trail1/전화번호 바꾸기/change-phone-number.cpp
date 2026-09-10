@@ -11,7 +11,7 @@ int main() {
     cin.get();
     cin >> t;
 
-    cout << 010 << '-' << t << '-' << s << '\n';
+    cout << "010" << '-' << t << '-' << s << '\n';
 
     return 0;
 }
